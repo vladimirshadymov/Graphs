@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+from matplotlib.ticker import MultipleLocator
 
 def open_file(path):
     input = open(path, 'r', encoding='utf-8')
@@ -13,7 +13,7 @@ def open_file(path):
     for i in range(len(lines)):
         lines[i] = [float(x) for x in lines[i].split()]
     return lines
-ar = open_file("input.txt")
+ar = open_file("input1.txt")
 
 x = [] ; xErr = []; y = []; yErr = [];
 
@@ -25,12 +25,16 @@ for i in range(len(ar)):
     yErr.append(ar[i][3])
 
 
+yline = []
+xline = np.arange(0, 4, 0.01)
+for x1 in xline:
+    yline.append(8.46)
 
-xminorLocator = MultipleLocator(1)
-yminorLocator = MultipleLocator(0.2)
+xminorLocator = MultipleLocator(0.1)
+yminorLocator = MultipleLocator(1)
 
-xmajorLocator = MultipleLocator(5)
-ymajorLocator = MultipleLocator(1)
+xmajorLocator = MultipleLocator(1)
+ymajorLocator = MultipleLocator(5)
 
 fig, ax = plt.subplots()
 
@@ -43,6 +47,7 @@ plt.errorbar(x, y, xerr=xErr, yerr=yErr, ecolor='k', capsize=3, elinewidth=1, fm
 a = np.arange(min(x)-1, max(x)+1, 0.001)
 p = np.poly1d(np.polyfit(x, y, 1))
 plt.plot(a, p(a), color='k')
+plt.plot(xline, yline, 'c-.')
 print('Уравнение', np.poly1d(np.polyfit(x, y, 1)))
 print('a=', np.polyfit(x, y, 1, cov = True)[0][0], 'b=', np.polyfit(x, y, 1, cov = True)[0][1])
 print(np.polyfit(x, y, 1, cov = True))
@@ -53,11 +58,11 @@ ax.yaxis.set_minor_locator(yminorLocator)
 ax.xaxis.set_major_locator(xmajorLocator)
 ax.yaxis.set_major_locator(ymajorLocator)
 
-plt.xlim(0, 23)
-plt.ylim(0, 8)
+plt.xlim(0, 3.5)
+plt.ylim(6, 21)
 
-plt.title(u'Зависимость тока от смещения')
-plt.xlabel(u'$x, см$')
-plt.ylabel(u'$\mathit {I}, 10^{-8}, A$')
+plt.title(u'Зависимость максимального отклонения от сопротивления')
+plt.ylabel(r'$\mathit{x}, см$', fontsize=10)
+plt.xlabel(r'$\frac{1}{\mathit{R_0+R}}, 10^{-4} \frac{1}{Ом}$', fontsize=13)
 
 plt.show()
