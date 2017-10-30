@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+from matplotlib.ticker import MultipleLocator
 
 def open_file(path):
     input = open(path, 'r', encoding='utf-8')
@@ -33,7 +33,7 @@ for i in range(len(ar)):
     xmajorLocator = MultipleLocator(1)
     ymajorLocator = MultipleLocator(0.2)
 
-fig, ax = plt.subplots()
+ax = plt.subplot()
 
 
 plt.plot(x, y, '.', color='k')
