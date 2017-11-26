@@ -4,9 +4,10 @@ from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
 
 
-t = np.arange(0.0, 100.0, 0.1)
+t = np.arange(0.0, 10.0, 0.1)
 
-plt.plot(np.cos(t), np.sin(2*t))
+a = 1.9
+plt.plot(t, 1/((1-t**2/a)**2+t**2)**0.5)
 plt.grid()
 
 plt.show()
