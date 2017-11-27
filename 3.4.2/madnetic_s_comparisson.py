@@ -41,10 +41,9 @@ ymajorLocator = MultipleLocator(0.05)
 ax = plt.subplot()
 
 
-plt.plot(x, y, '.')
+plt.plot(x, y, 'g^')
 plt.grid(which='major', ls='-', lw=0.5, c='k')
 plt.grid(which='minor', ls='--', lw=0.5, c='grey')
-plt.errorbar(x, y, xerr=xErr, yerr=yErr, ecolor='k', capsize=3, elinewidth=1, fmt=' ')
 
 
 
@@ -52,11 +51,23 @@ f = interp1d(x, y, kind=3)
 
 x_spline = np.linspace(x[0], x[-1], 500)
 
-plt.plot(x_spline,f(x_spline), 'g-.', label=u"Интерполяция сплайном \n 3-й степени")
+plt.plot(x_spline,f(x_spline), 'g-.', label=u"Данные лабораторной \n работы № 3.4.2 \n"+r'$\Theta_p = 18.5^oC$')
 
-x_dep = np.linspace(18.8, 40, 50)
 
-plt.plot(x_dep, buildCurieWeissGd(x_dep), 'r--', label='~'+r"$\frac{1}{T-\Theta_p}$")
+x_ISU_cgs = x_ISU_SI = np.linspace(48, 70, 500)
+y_ISU_cgs = 0.019789*(x_ISU_cgs+273.15)-6.342
+y_ISU_SI = (y_ISU_cgs/(4*np.pi)*1000)**-1
+
+plt.plot(x_ISU_SI, y_ISU_SI, 'r-', label='Данные ISU, \nаппроксимированный диапазон \nтемператур 350-875 '+'$^o$'+'K '+r'$\Theta_p = 47.3^oC$')
+
+
+x_ISU_cgs = x_ISU_SI = np.linspace(27, 70, 500)
+y_ISU_cgs = 0.01667*(x_ISU_cgs+273.15)-5.002217
+y_ISU_SI = (y_ISU_cgs/(4*np.pi)*1000)**-1
+
+plt.plot(x_ISU_SI, y_ISU_SI, 'b--', label='Данные ISU, \nаппроксимированный диапазон \nтемператур 350-470 '+'$^o$'+'K '+r'$\Theta_p = 27.0^oC$')
+
+
 
 
 ax.xaxis.set_minor_locator(xminorLocator)
@@ -65,11 +76,11 @@ ax.yaxis.set_minor_locator(yminorLocator)
 ax.xaxis.set_major_locator(xmajorLocator)
 ax.yaxis.set_major_locator(ymajorLocator)
 
-plt.xlim(14, 41)
-plt.ylim(0, 0.5)
+plt.xlim(14, 70)
+plt.ylim(0, 0.6)
 
 plt.title(u'')
-plt.title(u"Магнитная восприимчивость Gd "+r"$\chi(T)$")
+plt.title(u"Магнитная восприимчивость Gd "+r"$\chi(T)$"+u"в СИ")
 plt.xlabel(u'$T, ^0C$')
 plt.ylabel(r'$\chi(T)$')
 plt.legend(loc='best')
