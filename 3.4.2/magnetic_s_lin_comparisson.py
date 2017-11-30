@@ -47,14 +47,14 @@ plt.plot(ex_slope, ex_slope*slope+intercept,'g-.', label=u"Данные лабо
 
 x_ISU_cgs = x_ISU_SI = np.linspace(18, 70, 20)
 y_ISU_cgs = 0.019789*(x_ISU_cgs+273.15)-6.342
-y_ISU_SI = y_ISU_cgs/(4*np.pi)*1000
+y_ISU_SI = y_ISU_cgs/(4*np.pi)*1000/7.9
 
 plt.plot(x_ISU_SI, y_ISU_SI, 'r-', label='Данные ISU, \nаппроксимированный диапазон \nтемператур 350-875 '+'$^o$'+'K '+r'$\Theta_p = 47.3^oC$')
 
 
 x_ISU_cgs = x_ISU_SI = np.linspace(18, 70, 20)
 y_ISU_cgs = 0.01667*(x_ISU_cgs+273.15)-5.002217
-y_ISU_SI = y_ISU_cgs/(4*np.pi)*1000
+y_ISU_SI = y_ISU_cgs/(4*np.pi)*1000/7.9
 
 plt.plot(x_ISU_SI, y_ISU_SI, 'b--', label='Данные ISU, \nаппроксимированный диапазон \nтемператур 350-470 '+'$^o$'+'K '+r'$\Theta_p = 27.0^oC$')
 
